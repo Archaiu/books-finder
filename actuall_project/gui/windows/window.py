@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file './gui/templates/untitled.ui'
+# Form implementation generated from reading ui file 'actuall_project/gui/templates/untitled.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.11
 #
@@ -136,6 +136,40 @@ class Ui_MainWindow(object):
         self.dev_tools_button = QtWidgets.QCheckBox(self.centralwidget)
         self.dev_tools_button.setGeometry(QtCore.QRect(30, 180, 101, 20))
         self.dev_tools_button.setObjectName("dev_tools_button")
+        self.old_table = QtWidgets.QTableWidget(self.centralwidget)
+        self.old_table.setGeometry(QtCore.QRect(900, 290, 256, 192))
+        self.old_table.setObjectName("old_table")
+        self.old_table.setColumnCount(3)
+        self.old_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.old_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.old_table.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.old_table.setHorizontalHeaderItem(2, item)
+        self.old_table.horizontalHeader().setCascadingSectionResizes(False)
+        self.old_table.horizontalHeader().setDefaultSectionSize(89)
+        self.old_table.horizontalHeader().setMinimumSectionSize(49)
+        self.old_table.horizontalHeader().setSortIndicatorShown(False)
+        self.old_table.horizontalHeader().setStretchLastSection(False)
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(905, 250, 91, 16))
+        self.label_3.setObjectName("label_3")
+        self.authors_table = QtWidgets.QTableWidget(self.centralwidget)
+        self.authors_table.setGeometry(QtCore.QRect(905, 560, 256, 192))
+        self.authors_table.setObjectName("authors_table")
+        self.authors_table.setColumnCount(2)
+        self.authors_table.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.authors_table.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.authors_table.setHorizontalHeaderItem(1, item)
+        self.label_4 = QtWidgets.QLabel(self.centralwidget)
+        self.label_4.setGeometry(QtCore.QRect(910905, 530, 55, 21))
+        self.label_4.setObjectName("label_4")
+        self.label_5 = QtWidgets.QLabel(self.centralwidget)
+        self.label_5.setGeometry(QtCore.QRect(905, 530, 181, 16))
+        self.label_5.setObjectName("label_5")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -175,6 +209,19 @@ class Ui_MainWindow(object):
         self.delete_books_button.setText(_translate("MainWindow", "Delete books"))
         self.include_author_buttom.setText(_translate("MainWindow", "Include author"))
         self.dev_tools_button.setText(_translate("MainWindow", "Dev Tools"))
+        item = self.old_table.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Book"))
+        item = self.old_table.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Search"))
+        item = self.old_table.horizontalHeaderItem(2)
+        item.setText(_translate("MainWindow", "Delete"))
+        self.label_3.setText(_translate("MainWindow", "Old inputs"))
+        item = self.authors_table.horizontalHeaderItem(0)
+        item.setText(_translate("MainWindow", "Author"))
+        item = self.authors_table.horizontalHeaderItem(1)
+        item.setText(_translate("MainWindow", "Positions"))
+        self.label_4.setText(_translate("MainWindow", "TextLabel"))
+        self.label_5.setText(_translate("MainWindow", "Authors stats"))
 
 
 if __name__ == "__main__":

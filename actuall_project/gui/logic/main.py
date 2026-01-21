@@ -23,6 +23,7 @@ class Window(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.start_look()
         self.connect_functions()
+        self.show_olders()
         
     def start_look(self):
         self.dev_tools_stack.setCurrentIndex(0)
@@ -32,6 +33,10 @@ class Window(QMainWindow, Ui_MainWindow):
         self.books_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeToContents)
         self.books_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeToContents)
         self.results_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeToContents)
+        header = self.old_table.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.Stretch)
+        header.setSectionResizeMode(1, QHeaderView.Interactive)
+        header.setSectionResizeMode(2, QHeaderView.Interactive)
 
 
     def connect_functions(self):
@@ -84,6 +89,7 @@ class Window(QMainWindow, Ui_MainWindow):
             button.setText("Click")
             button.clicked.connect(lambda ignored, x = row["title"] : self.show_book_info(x))
             self.results_table.setCellWidget(i, 3, button)
+        self.show_olders()
 
     def show_book_info(self, book):
         self.current_book_index=data_provider.get_info(book)["id"]
@@ -94,12 +100,36 @@ class Window(QMainWindow, Ui_MainWindow):
     def add_books(self, path):
         dev_tools.add_new_books(path)
 
-    def delete_books(self):
-        pass
+    def delete_books(self, book):
+        data_provider.remove_olds(data_provider.get_info(book)["id"])
+        self.show_olders()
 
     def add_interactions(self, path):
         dev_tools.add_new_relations(path)
 
+    def show_olders(self):
+        data = data_provider.get_olds()
+        self.old_table.setRowCount(0)
+        for i, row in enumerate(data):
+            self.old_table.insertRow(i)
+            self.old_table.setItem(i, 0, QTableWidgetItem(row["title"]))
+            button = QPushButton()
+            button.setText("Search")
+            button.clicked.connect(lambda ignored, x = row["title"] : self.look_results_for_book(data_provider.get_info(x)["id"]))
+            self.old_table.setCellWidget(i, 1, button)
+            button = QPushButton()
+            button.setText("Delete")
+            button.clicked.connect(lambda ignored, x = row["title"] : self.delete_books(x))
+            self.old_table.setCellWidget(i, 2, button)
+        self.show_authors()
+            
+    def show_authors(self):
+        data = data_provider.get_stats()
+        self.authors_table.setRowCount(0)
+        for i, row in enumerate(data):
+            self.authors_table.insertRow(i)
+            self.authors_table.setItem(i, 0, QTableWidgetItem(row["author"]))
+            self.authors_table.setItem(i, 1, QTableWidgetItem(str(row["positions"])))   
 
 
 def main():

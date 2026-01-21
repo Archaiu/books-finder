@@ -39,18 +39,19 @@ def get_info(book):
 
 def get_olds(number : int = 5):
     cur = get_cursor()
-    cur.execute("""SELECT * FROM project_data.old_user_input
-                ORDER BY data DESC
+    cur.execute("""SELECT * FROM project_data.older_books
                 LIMIT %s""",(number,))
     return cur.fetchall()
 
 def remove_olds(id : int):
     cur = get_cursor()
     change_values("""DELETE FROM project_data.old_user_input o
-                  WHERE %s = o.book_id;""")
+                  WHERE %s = o.book_id;""",(id,))
     
-
-
+def get_stats():
+    cur = get_cursor()
+    cur.execute("""SELECT * FROM project_data.author_stats;""")
+    return cur.fetchall()
 
 
 
